@@ -43,6 +43,8 @@ const MapWithAMarkerClusterer = compose(
         <Marker
           key={marker.ID}
           title={marker.AddressInfo.Title}
+          label={marker.AddressInfo.UsageCost || "$0.00"}
+          icon= 'label-right-arrow-outline-icon.png'
           position={{ lat: marker.AddressInfo.Latitude, lng: marker.AddressInfo.Longitude }}
         />
       ))}
@@ -56,7 +58,7 @@ class DemoApp extends React.PureComponent {
   }
 
   componentDidMount() {
-    const url = "https://api.openchargemap.io/v2/poi/?output=json&countrycode=US&maxresults=50&latitude=41.9&longitude=-87.624&compact=true&verbose=false"
+    const url = "https://api.openchargemap.io/v2/poi/?output=json&countrycode=US&maxresults=50&latitude=41.9&longitude=-87.624&verbose=false"
 
     fetch(url)
       .then(res => res.json())
