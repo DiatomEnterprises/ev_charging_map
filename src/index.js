@@ -1,53 +1,77 @@
+/*global google*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const fetch = require("isomorphic-fetch");
+const { compose, withProps, withHandlers } = require("recompose");
+const {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} = require("react-google-maps");
+const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
-class App extends React.Component {
-  constructor(props){
-      super(props);
-      this.state = {
-        url: "http://"
-      }
+const MapWithAMarkerClusterer = compose(
+  withProps({
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Bobct-Buc3Ib2KMaVWK036zpRqNuM18&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withHandlers({
+    onMarkerClustererClick: () => (markerClusterer) => {
+      const clickedMarkers = markerClusterer.getMarkers()
+      console.log(`Current clicked markers length: ${clickedMarkers.length}`)
+      console.log(clickedMarkers)
+    },
+  }),
+  withScriptjs,
+  withGoogleMap
+)(props =>
+  <GoogleMap
+    defaultZoom={3}
+    defaultCenter={{ lat: 25.0391667, lng: 121.525 }}
+  >
+    <MarkerClusterer
+      onClick={props.onMarkerClustererClick}
+      averageCenter
+      enableRetinaIcons
+      gridSize={60}
+    >
+      {props.markers.map(marker => (
+        <Marker
+          key={marker.ID}
+          title={marker.AddressInfo.Title}
+          position={{ lat: marker.AddressInfo.Latitude, lng: marker.AddressInfo.Longitude }}
+        />
+      ))}
+    </MarkerClusterer>
+  </GoogleMap>
+);
+
+class DemoApp extends React.PureComponent {
+  componentWillMount() {
+    this.setState({ markers: [] })
   }
 
-  render(){
-    const { compose, withProps } = require("recompose");
-    const {
-      withScriptjs,
-      withGoogleMap,
-      GoogleMap,
-      KmlLayer,
-    } = require("react-google-maps");
+  componentDidMount() {
+    const url = "https://api.openchargemap.io/v2/poi/?output=json&countrycode=US&maxresults=50&latitude=41.9&longitude=-87.624&compact=true&verbose=false"
 
-    const MapWithAKmlLayer = compose(
-      withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Bobct-Buc3Ib2KMaVWK036zpRqNuM18&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-      }),
-      withScriptjs,
-      withGoogleMap
-    )(props =>
-      <GoogleMap
-        defaultZoom={9}
-        defaultCenter={{ lat: 41.9, lng: -87.624 }}
-      >
-        <KmlLayer
-          url="https://api.openchargemap.io/v2/poi/?output=kml&countrycode=US&maxresults=50&latitude=&longitude"
-          options={{ preserveViewport: true }}
-        />
-      </GoogleMap>
-    );
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ markers: data });
+      });
+  }
 
-
-    return(
-      <MapWithAKmlLayer />
+  render() {
+    return (
+      <MapWithAMarkerClusterer markers={this.state.markers} />
     )
   }
-
-
 }
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<DemoApp />, document.getElementById('root'));
