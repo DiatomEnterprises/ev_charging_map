@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
+    "react-geolocated": "^2.4.0",
     "react-google-maps": "^9.4.5",
     "react-scripts": "1.1.5"
   },

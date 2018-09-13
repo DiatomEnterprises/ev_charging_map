@@ -2,42 +2,42 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Sidebar from './sidebar.js';
 import TopNavbar from './top_navbar.js';
+import MapWithMarkers from './map_with_markers.js';
 
-
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {
       markers: [],
       location: {
-        latitude: 56.946285,
-        longitude: 24.105078
+        latitude: -34.397,
+        longitude: 150.644
       }
     }
+
   }
 
-  getCurrentPosition() {
-    try {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const location = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-          this.setState({ location: location});
-        },
-        (error) => {
-          alert("", "Unexpected error.");
-        }
-      );
-    } catch(e) {
-      alert(e.message || "");
-    }
-  };
+  getMyLocation() {
+      const location = window.navigator && window.navigator.geolocation
+      if (location) {
+        location.getCurrentPosition((position) => {
+          this.setState({
+            location: {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            }
+          })
+          this.getMarkers()
+        }, (error) => {
+          console.log("Error getting geolocation")
+        })
+      }
 
-  getMarkers() {
+    }
+
+  getMarkers(){
     const fetch = require("isomorphic-fetch");
-    const url = "https://api.openchargemap.io/v2/poi/?output=json&maxresults=20&latitude="+this.state.latitude+"&longitude="+this.state.longitude+"&verbose=false"
+    const url = "https://api.openchargemap.io/v2/poi/?output=json&maxresults=100&latitude="+this.state.location.latitude+"&longitude="+this.state.location.longitude+"&verbose=false&distance=200&distanceunit=KM"
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -45,13 +45,16 @@ class App extends React.Component {
       });
   }
 
+  componentDidMount() {
+    this.getMyLocation()
+  }
+
   render() {
-    this.getCurrentPosition();
-    this.getMarkers();
     return (
-      <div class="container">
+      <div className="container">
         <TopNavbar />
         <Sidebar />
+        <MapWithMarkers markers={this.state.markers} location={this.state.location}/>
       </div>
     )
   }

@@ -1,5 +1,7 @@
 /*global google*/
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 const { compose, withProps, withHandlers } = require("recompose");
 const {
   withScriptjs,
@@ -9,7 +11,7 @@ const {
 } = require("react-google-maps");
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
-const MapWithMarkers = compose(
+export const MapWithMarkers = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Bobct-Buc3Ib2KMaVWK036zpRqNuM18&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
@@ -56,3 +58,5 @@ const MapWithMarkers = compose(
     </MarkerClusterer>
   </GoogleMap>
 );
+
+export default MapWithMarkers
