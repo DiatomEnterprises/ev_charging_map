@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Sidebar from './sidebar.js';
 import TopNavbar from './top_navbar.js';
 import MapWithMarkers from './map_with_markers.js';
+import './index.css';
 
 class App extends React.PureComponent {
   constructor(props){
@@ -54,7 +55,9 @@ class App extends React.PureComponent {
       <div className="container">
         <TopNavbar />
         <Sidebar />
-        <MapWithMarkers markers={this.state.markers} location={this.state.location}/>
+        <div className="content">
+          <MapWithMarkers markers={this.state.markers} location={this.state.location}/>
+        </div>
       </div>
     )
   }

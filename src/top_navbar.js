@@ -2,7 +2,22 @@ import React from 'react';
 
 class TopNavbar extends React.Component {
   render(){
-    return(<div></div>)
+    return(
+      <div className="navbar">
+        <li>
+          <a href="default.html">HJEM</a>
+        </li>
+        <li>
+          <a href="attraksjoner.html">ATTRAKSJONasdasdsaER</a>
+        </li>
+        <li>
+          <a href="shopping.html">SHOPPING</a>
+        </li>
+        <li>
+          <a href="lenker.html">LENKER</a>
+        </li>
+      </div>
+    )
   }
 }
 
