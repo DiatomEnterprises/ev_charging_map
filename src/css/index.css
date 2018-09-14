@@ -1,6 +1,7 @@
 body {
   font-size: 15px;
   height: 100%;
+  margin: 0px;
 }
 
 html {
@@ -15,7 +16,7 @@ html {
   height: 100%;
   display: grid;
   grid-template-columns: 20% auto 10%;
-  grid-template-rows: 25% 70% 25%;
+  grid-template-rows: 10% 70% 20%;
 }
 
 .navbar {
@@ -29,7 +30,7 @@ html {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 
 .content{
