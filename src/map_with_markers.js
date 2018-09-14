@@ -32,6 +32,7 @@ export const MapWithMarkers = compose(
     defaultZoom={9}
     defaultCenter={{ lat: props.location.latitude, lng: props.location.longitude }}
   >
+    <Marker position={{ lat: props.location.latitude, lng: props.location.longitude }} />
     <MarkerClusterer
       onClick={props.onMarkerClustererClick}
       averageCenter
