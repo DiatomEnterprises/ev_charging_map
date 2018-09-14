@@ -3,6 +3,7 @@ li.sidebar-cell a {
     color: #000;
     padding: 5% 4%;
     text-decoration: none;
+    border-top: 1px solid #3e9bbe;
 }
 
 li.sidebar-cell a.active {

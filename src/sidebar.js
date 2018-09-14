@@ -4,8 +4,7 @@ import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
 
 class Sidebar extends React.Component {
-
-  renderSlider(text, max, default_val){
+  renderSlider(text, max, default_val, onchange){
     const createSliderWithTooltip = Slider.createSliderWithTooltip;
     const Handle = Slider.Handle;
 
@@ -28,7 +27,7 @@ class Sidebar extends React.Component {
     return(
       <div style={wrapperStyle}>
         { text }
-        <Slider min={0} max={max} defaultValue={default_val} handle={handle} />
+        <Slider min={0} max={max} defaultValue={default_val} handle={handle} onChange={onchange} />
       </div>
     )
   }
@@ -36,14 +35,22 @@ class Sidebar extends React.Component {
 
   renderRangeSlider(){
     return(
-      this.renderSlider(<p>Select search range in km</p>, 150, 50)
+      this.renderSlider(<p>Select search range in km - {this.props.distance}</p>, 150, this.props.distance, (event) => this.changeDistance(event))
     )
   }
 
   renderStationCountSlider(){
     return(
-      this.renderSlider(<p>Select amount of gas stations to be displayed</p>, 100, 50)
+      this.renderSlider(<p>Select amount of gas stations to be displayed - {this.props.maxresults}</p>, 200, this.props.maxresults, (event) => this.changeMaxResults(event))
     )
+  }
+
+  changeDistance(e){
+    this.props.onDistanceChange(e)
+  }
+
+  changeMaxResults(e){
+    this.props.onMaxResultsChange(e)
   }
 
   render(){
@@ -51,16 +58,16 @@ class Sidebar extends React.Component {
       <div className="sidebar sidebar-grid">
         <div className="sidebar-navi">
           <li className="sidebar-cell">
-            <a href="default.html">HJEM</a>
+            <a href="MAP.html">MAP</a>
           </li>
           <li className="sidebar-cell">
-            <a href="attraksjoner.html">ATTRAKSJONasdasdsaER</a>
+            <a href="LIST.html">LIST</a>
           </li>
           <li className="sidebar-cell">
-            <a href="shopping.html">SHOPPING</a>
+            <a href="YourAuto.html">MY CAR</a>
           </li>
           <li className="sidebar-cell">
-            <a href="lenker.html">LENKER</a>
+            <a href="Shop.html">SHOP</a>
           </li>
         </div>
         <div className="sidebar-filter">

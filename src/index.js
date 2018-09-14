@@ -16,7 +16,9 @@ class App extends React.PureComponent {
       location: {
         latitude: -34.397,
         longitude: 150.644
-      }
+      },
+      distance: 50,
+      maxresults: 100,
     }
 
   }
@@ -41,7 +43,11 @@ class App extends React.PureComponent {
 
   getMarkers(){
     const fetch = require("isomorphic-fetch");
-    const url = "https://api.openchargemap.io/v2/poi/?output=json&maxresults=100&latitude="+this.state.location.latitude+"&longitude="+this.state.location.longitude+"&verbose=false&distance=200&distanceunit=KM"
+    const url = "https://api.openchargemap.io/v2/poi/?output=json&maxresults="
+      + this.state.maxresults
+      + "&latitude="+this.state.location.latitude
+      + "&longitude="+this.state.location.longitude
+      + "&verbose=false&distance="+this.state.distance+"&distanceunit=KM"
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -53,11 +59,27 @@ class App extends React.PureComponent {
     this.getMyLocation()
   }
 
+  changeDistance(new_distance){
+    this.setState({distance: new_distance})
+    this.getMyLocation()
+  }
+
+  changeMaxResults(new_max_results){
+    this.setState({maxresults: new_max_results})
+    this.getMyLocation()
+    
+  }
+
   render() {
     return (
       <div className="container">
         <TopNavbar />
-        <Sidebar />
+        <Sidebar
+          distance={this.state.distance}
+          maxresults={this.state.maxresults}
+          onDistanceChange={(new_distance) => this.changeDistance(new_distance)}
+          onMaxResultsChange={(new_max_results) => this.changeMaxResults(new_max_results)}
+        />
         <div className="content">
           <div className="content-grid">
             <div className="content-map">

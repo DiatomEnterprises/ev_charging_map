@@ -5,16 +5,16 @@ class TopNavbar extends React.Component {
     return(
       <div className="navbar navbar-first-row">
         <li className="navbar-cell">
-          <a href="default.html">HJEM</a>
+          <img src="logo.png" style={ {height: '100%'} } />
         </li>
         <li className="navbar-cell">
-          <a href="attraksjoner.html">ATTRAKSJONasdasdsaER</a>
+          <a href="info.html">ABOUT</a>
         </li>
         <li className="navbar-cell">
-          <a href="shopping.html">SHOPPING</a>
+          <a href="contacts.html">CONTACTS</a>
         </li>
         <li className="navbar-cell">
-          <a href="lenker.html">LENKER</a>
+          <a href="login.html">LOGIN</a>
         </li>
       </div>
     )
