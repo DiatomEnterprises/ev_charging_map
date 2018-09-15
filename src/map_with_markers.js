@@ -1,6 +1,7 @@
 /*global google*/
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Circle } from "react-google-maps";
 
 const { compose, withProps, withHandlers } = require("recompose");
 const {
@@ -32,7 +33,19 @@ export const MapWithMarkers = compose(
     defaultZoom={9}
     defaultCenter={{ lat: props.location.latitude, lng: props.location.longitude }}
   >
-    <Marker position={{ lat: props.location.latitude, lng: props.location.longitude }} />
+    <Marker
+      position={{ lat: props.location.latitude, lng: props.location.longitude } }
+      defaultDraggable={true}
+      onDragEnd={(event) => props.onCurrentMarkerDrag(event)}
+    />
+    <Circle
+      center={{ lat: props.location.latitude, lng: props.location.longitude } }
+      radius={ props.distance * 1000 } //in meters
+      options={ {
+        fillColor: '#78ADC0',
+        strokeColor: '#528BE2'
+      } }
+    />
     <MarkerClusterer
       onClick={props.onMarkerClustererClick}
       averageCenter
@@ -58,6 +71,7 @@ export const MapWithMarkers = compose(
       ))}
     </MarkerClusterer>
   </GoogleMap>
+
 );
 
 export default MapWithMarkers

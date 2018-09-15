@@ -67,7 +67,16 @@ class App extends React.PureComponent {
   changeMaxResults(new_max_results){
     this.setState({maxresults: new_max_results})
     this.getMyLocation()
-    
+  }
+
+  dragCurrentMarker(ev){
+    this.setState({
+      location: {
+        latitude: ev.latLng.lat(),
+        longitude: ev.latLng.lng()
+      }
+    })
+    this.getMarkers()
   }
 
   render() {
@@ -83,7 +92,12 @@ class App extends React.PureComponent {
         <div className="content">
           <div className="content-grid">
             <div className="content-map">
-              <MapWithMarkers markers={this.state.markers} location={this.state.location}/>
+              <MapWithMarkers
+                markers={this.state.markers}
+                location={this.state.location}
+                distance={this.state.distance}
+                onCurrentMarkerDrag={(e) => this.dragCurrentMarker(e)}
+              />
             </div>
           </div>
         </div>
