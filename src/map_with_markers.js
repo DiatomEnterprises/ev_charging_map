@@ -30,8 +30,9 @@ export const MapWithMarkers = compose(
   withGoogleMap
 )(props =>
   <GoogleMap
-    defaultZoom={9}
+    defaultZoom={13}
     defaultCenter={{ lat: props.location.latitude, lng: props.location.longitude }}
+    center={{ lat: props.location.latitude, lng: props.location.longitude }}
   >
     <Marker
       position={{ lat: props.location.latitude, lng: props.location.longitude } }

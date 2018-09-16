@@ -35,22 +35,20 @@ class Sidebar extends React.Component {
 
   renderRangeSlider(){
     return(
-      this.renderSlider(<p>Select search range in km - {this.props.distance}</p>, 150, this.props.distance, (event) => this.changeDistance(event))
+      this.renderSlider(<p>Select search range - {this.props.distance} km</p>, 150, this.props.distance, (event) => this.props.onDistanceChange(event))
     )
   }
 
   renderStationCountSlider(){
     return(
-      this.renderSlider(<p>Select amount of gas stations to be displayed - {this.props.maxresults}</p>, 200, this.props.maxresults, (event) => this.changeMaxResults(event))
+      this.renderSlider(<p>Select amount of gas stations to be displayed - {this.props.maxresults}</p>, 200, this.props.maxresults, (event) => this.props.onMaxResultsChange(event))
     )
   }
 
-  changeDistance(e){
-    this.props.onDistanceChange(e)
-  }
-
-  changeMaxResults(e){
-    this.props.onMaxResultsChange(e)
+  renderMinPowerSlider(){
+    return(
+      this.renderSlider(<p>Select min amount of power that you require - {this.props.minpowerkw} kW</p>, 200, this.props.minpowerkw, (event) => this.props.onMinPowerChange(event))
+    )
   }
 
   render(){
@@ -73,6 +71,7 @@ class Sidebar extends React.Component {
         <div className="sidebar-filter">
           {this.renderRangeSlider()}
           {this.renderStationCountSlider()}
+          {this.renderMinPowerSlider()}
         </div>
       </div>
     )

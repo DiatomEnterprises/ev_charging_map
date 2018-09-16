@@ -21,7 +21,7 @@ li.sidebar-cell a:hover:not(.active) {
   height: 100%;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 30% 70%;
   border-right: 1px solid #3e9bbe;
 }
 
