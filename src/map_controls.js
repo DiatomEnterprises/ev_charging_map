@@ -24,7 +24,9 @@ class MapControls extends React.Component {
   renderSelect(name, alternativeField, label_text, onChange){
     const options =
       this.state.referencedata[name].map(function(data) {
-        return {value: data.ID, label: data.Title + " - (" + data[alternativeField] + ")"}
+        var label = data.Title
+        if (alternativeField) label += " - (" + data[alternativeField] + ")"
+        return {value: data.ID, label: label }
       });
     ;
 
@@ -60,6 +62,12 @@ class MapControls extends React.Component {
     )
   }
 
+  renderStatusTypesSelect(){
+    return(
+      this.renderSelect("StatusTypes", null, "Please, select status of a station", (event) => this.props.onStatusTypeChange(this.getMultValue(event)))
+    )
+  }
+
   renderResetFiltersButton(){
     return(
       <button onClick={(event) => this.props.onResetFiltersClick(event)}>Clear Filters</button>
@@ -72,6 +80,7 @@ class MapControls extends React.Component {
         <div className="map-controls">
           { this.renderConnectionTypesSelect() }
           { this.renderChargerTypesSelect() }
+          { this.renderStatusTypesSelect() }
           { /*this.renderResetFiltersButton()*/ }
         </div>
       )}
