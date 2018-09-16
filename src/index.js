@@ -22,6 +22,7 @@ class App extends React.PureComponent {
       maxresults: 10,
       minpowerkw: 0,
       connectionTypeId: "",
+      chargingLevelId: "",
       refetchState: false,
     }
 
@@ -61,7 +62,9 @@ class App extends React.PureComponent {
       + "&distance="+state.distance
       + "&distanceunit=KM"
       + "&minpowerkw="+state.minpowerkw
-      + "&connectiontypeid="+state.connectionTypeId;
+      + "&connectiontypeid="+state.connectionTypeId
+      + "&levelid="+state.chargingLevelId;
+
     fetch(url)
       .then(res => res.json())
       .then(data => {
@@ -89,6 +92,10 @@ class App extends React.PureComponent {
     this.setState({connectionTypeId: new_id, refetchState: true})
   }
 
+  changeChargingLevelId(new_id){
+    this.setState({chargingLevelId: new_id, refetchState: true})
+  }
+
   dragCurrentMarker(ev){
     this.setState({
       location: {
@@ -100,7 +107,11 @@ class App extends React.PureComponent {
   }
 
   clickResetFilters(e){
-    this.setState({connectionTypeId: "", refetchState: true})
+    this.setState({
+      connectionTypeId: "",
+      chargingLevelId: "",
+      refetchState: true
+    })
   }
 
   render() {
@@ -120,6 +131,7 @@ class App extends React.PureComponent {
             <div className="content-filters">
               <MapControls
                 onConnectionTypeChange={(id) => this.changeConnectionType(id)}
+                onChargerTypeChange={(id) => this.changeChargingLevelId(id)}
                 onResetFiltersClick={(e) => this.clickResetFilters(e)}
               />
             </div>

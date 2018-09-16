@@ -27,7 +27,7 @@ class Sidebar extends React.Component {
     return(
       <div style={wrapperStyle}>
         { text }
-        <Slider min={0} max={max} defaultValue={default_val} handle={handle} onChange={onchange} />
+        <Slider min={0} max={max} defaultValue={default_val} handle={handle} onAfterChange={onchange} />
       </div>
     )
   }

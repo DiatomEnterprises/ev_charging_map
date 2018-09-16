@@ -30,18 +30,33 @@ class MapControls extends React.Component {
 
     return(
       <div>
-        <label>{label_text}</label>
+        <label id={name+"Label"}>{label_text}</label>
         <Select
           options={options}
           onChange={onChange}
+          isMulti={true}
+          aria-labelledby={name+"Label"}
+          inputId={name}
         />
       </div>
     )
   }
 
+  getMultValue(e){
+    return e.map(function(data) {
+      return data.value
+    }).toString();
+  }
+
   renderConnectionTypesSelect(){
     return(
-      this.renderSelect("ConnectionTypes", "FormalName", "Please, select the connection type", (event) => this.props.onConnectionTypeChange(event.value))
+      this.renderSelect("ConnectionTypes", "FormalName", "Please, select the connection type", (event) => this.props.onConnectionTypeChange(this.getMultValue(event)))
+    )
+  }
+
+  renderChargerTypesSelect(){
+    return(
+      this.renderSelect("ChargerTypes", "Comments", "Please, select the charger type", (event) => this.props.onChargerTypeChange(this.getMultValue(event)))
     )
   }
 
@@ -56,7 +71,8 @@ class MapControls extends React.Component {
       return(
         <div className="map-controls">
           { this.renderConnectionTypesSelect() }
-          { this.renderResetFiltersButton() }
+          { this.renderChargerTypesSelect() }
+          { /*this.renderResetFiltersButton()*/ }
         </div>
       )}
     else {
