@@ -11,12 +11,6 @@ li.navbar-cell {
 }
 
 li.navbar-cell button {
-
-  background:none;
-  border:none;
-  font: inherit;
-  cursor: pointer;
-
   display: block;
   color: white;
   text-align: center;

@@ -1,0 +1,24 @@
+.list-info{
+  height: 100%;
+  margin: 5px !important;
+  overflow-y: scroll;
+}
+
+.list-item{
+  background-color: #FFFFFF;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #3e9bbe;
+}
+
+.list-title{
+  border-bottom: 2px solid #3e9bbe;
+}
+
+.content-main{
+  background-color: #CFDBEB;
+}
+
+.right{
+  float: right;
+}

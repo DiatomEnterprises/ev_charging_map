@@ -8,8 +8,16 @@ html {
  height: 100%;
 }
 
+button {
+  background:none;
+  border:none;
+  font: 400 14px Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+
 #root{
   height: 100%;
+  font: 400 14px Roboto, Arial, sans-serif;
 }
 
 .container {

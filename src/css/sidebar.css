@@ -1,8 +1,4 @@
 li.sidebar-cell button {
-    background:none;
-    border:none;
-    font: inherit;
-    cursor: pointer;
     width:100%;
     display: block;
     color: #000;
