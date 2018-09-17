@@ -59,13 +59,13 @@ class Sidebar extends React.Component {
             <a href="MAP.html">MAP</a>
           </li>
           <li className="sidebar-cell">
-            <a href="LIST.html">LIST</a>
+            <a href="LIST.html">LIST <i class="fas fa-wrench"/></a>
           </li>
           <li className="sidebar-cell">
-            <a href="YourAuto.html">MY CAR</a>
+            <a href="YourAuto.html">MY CAR <i class="fas fa-wrench"/></a>
           </li>
           <li className="sidebar-cell">
-            <a href="Shop.html">SHOP</a>
+            <a href="Shop.html">SHOP <i class="fas fa-wrench"/></a>
           </li>
         </div>
         <div className="sidebar-filter">
