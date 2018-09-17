@@ -3,16 +3,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Circle } from "react-google-maps";
 
-const { compose, withProps, withHandlers } = require("recompose");
+const { compose, withProps, withHandlers, withStateHandlers } = require("recompose");
 const {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } = require("react-google-maps");
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 export const MapWithMarkers = compose(
+  withStateHandlers(() => ({
+    isOpen: false,
+    infoIndex: null
+  }), {
+    onToggleOpen: ({ isOpen, infoIndex }) => (index) => ({
+      isOpen: infoIndex !== index || !isOpen,
+      infoIndex: index
+    })
+  }),
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA4Bobct-Buc3Ib2KMaVWK036zpRqNuM18&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
@@ -68,7 +78,16 @@ export const MapWithMarkers = compose(
             anchor: new google.maps.Point(150, 35)
           } }
           position={{ lat: marker.AddressInfo.Latitude, lng: marker.AddressInfo.Longitude }}
-        />
+          onClick={() => props.onToggleOpen(marker.ID)}
+        >
+          {(props.isOpen && props.infoIndex === marker.ID) && <InfoWindow onCloseClick={props.onToggleOpen}>
+            <div className="marker-info">
+              <p> {marker.AddressInfo.Title} </p>
+              <p> Usage cost: { marker.AddressInfo.UsageCost || "$0.00" } </p>
+              <p> <a href={"https://www.google.com/maps/dir/?api=1&destination="+marker.AddressInfo.Latitude+","+marker.AddressInfo.Longitude} target="_blank"> Navigate! </a> </p>
+            </div>
+          </InfoWindow>}
+        </Marker>
       ))}
     </MarkerClusterer>
   </GoogleMap>
