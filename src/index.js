@@ -4,6 +4,7 @@ import Sidebar from './sidebar.js';
 import TopNavbar from './top_navbar.js';
 import MapWithMarkers from './map_with_markers.js';
 import MapControls from './map_controls.js';
+import About from './about.js';
 import './css/index.css';
 import './css/navbar.css';
 import './css/sidebar.css';
@@ -24,7 +25,8 @@ class App extends React.PureComponent {
       connectionTypeId: "",
       chargingLevelId: "",
       refetchState: false,
-      statustypeid: ""
+      statustypeid: "",
+      page: "IndexPage"
     }
 
   }
@@ -120,10 +122,49 @@ class App extends React.PureComponent {
     })
   }
 
+  changeCurrentPage(pageName){
+    this.setState({
+      page: pageName,
+      refetchState: false
+    })
+  }
+
+  router(){
+
+      switch(this.state.page) {
+        case "IndexPage":
+          return(
+            <div className="content-grid">
+              <div className="content-filters">
+                <MapControls
+                  onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
+                  onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
+                  onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
+                  onResetFiltersClick={(e) => this.clickResetFilters(e)}
+                />
+              </div>
+              <div className="content-main">
+                <MapWithMarkers
+                  markers={this.state.markers}
+                  location={this.state.location}
+                  distance={this.state.distance}
+                  onCurrentMarkerDrag={(e) => this.dragCurrentMarker(e)}
+                />
+              </div>
+            </div>
+          );
+        case "AboutPage":
+          return (
+            <div className="content-grid">
+              <About />
+            </div>);
+      };
+  }
+
   render() {
     return (
       <div className="container">
-        <TopNavbar />
+        <TopNavbar changeCurrentPage={(new_page) => this.changeCurrentPage(new_page)} />
         <Sidebar
           distance={this.state.distance}
           maxresults={this.state.maxresults}
@@ -131,26 +172,10 @@ class App extends React.PureComponent {
           onDistanceChange={(new_distance) => this.changeDistance(new_distance)}
           onMaxResultsChange={(new_max_results) => this.changeMaxResults(new_max_results)}
           onMinPowerChange={(new_minpowerkw) => this.changeMinPower(new_minpowerkw)}
+          changeCurrentPage={(new_page) => this.changeCurrentPage(new_page)}
         />
         <div className="content">
-          <div className="content-grid">
-            <div className="content-filters">
-              <MapControls
-                onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
-                onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
-                onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
-                onResetFiltersClick={(e) => this.clickResetFilters(e)}
-              />
-            </div>
-            <div className="content-map">
-              <MapWithMarkers
-                markers={this.state.markers}
-                location={this.state.location}
-                distance={this.state.distance}
-                onCurrentMarkerDrag={(e) => this.dragCurrentMarker(e)}
-              />
-            </div>
-          </div>
+          { this.router() }
         </div>
       </div>
     )

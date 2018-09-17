@@ -8,13 +8,13 @@ class TopNavbar extends React.Component {
           <img src="logo.png" style={ {height: '100%'} } />
         </li>
         <li className="navbar-cell">
-          <a href="info.html">ABOUT <i class="fas fa-wrench"/></a>
+          <a href="info.html">ABOUT <i className="fas fa-wrench"/></a>
         </li>
         <li className="navbar-cell">
-          <a href="contacts.html">CONTACTS <i class="fas fa-wrench"/></a>
+          <a href="contacts.html">CONTACTS <i className="fas fa-wrench"/></a>
         </li>
         <li className="navbar-cell">
-          <a href="login.html">LOGIN <i class="fas fa-wrench"/></a>
+          <a href="login.html">LOGIN <i className="fas fa-wrench"/></a>
         </li>
       </div>
     )

@@ -43,3 +43,7 @@ html {
 li {
   list-style: none;
 }
+
+.about{
+  margin: 20px;
+}
