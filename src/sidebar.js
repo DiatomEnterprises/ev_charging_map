@@ -56,16 +56,16 @@ class Sidebar extends React.Component {
       <div className="sidebar sidebar-grid">
         <div className="sidebar-navi">
           <li className="sidebar-cell">
-            <a href="#" onClick={(e) => this.props.changeCurrentPage("IndexPage")}>MAP</a>
+            <button onClick={(e) => this.props.changeCurrentPage("IndexPage")}>MAP</button>
           </li>
           <li className="sidebar-cell">
-            <a href="#" onClick={(e) => this.props.changeCurrentPage("AboutPage")}>LIST <i className="fas fa-wrench"/></a>
+            <button onClick={(e) => this.props.changeCurrentPage("ListPage")}>LIST</button>
           </li>
           <li className="sidebar-cell">
-            <a href="#" onClick={(e) => this.props.changeCurrentPage("AboutPage")}>MY CAR <i className="fas fa-wrench"/></a>
+            <button onClick={(e) => this.props.changeCurrentPage("AboutPage")}>MY CAR <i className="fas fa-wrench"/></button>
           </li>
           <li className="sidebar-cell">
-            <a href="#" onClick={(e) => this.props.changeCurrentPage("AboutPage")}>SHOP <i className="fas fa-wrench"/></a>
+            <button onClick={(e) => this.props.changeCurrentPage("AboutPage")}>SHOP <i className="fas fa-wrench"/></button>
           </li>
         </div>
         <div className="sidebar-filter">

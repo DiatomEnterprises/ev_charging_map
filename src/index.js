@@ -4,7 +4,9 @@ import Sidebar from './sidebar.js';
 import TopNavbar from './top_navbar.js';
 import MapWithMarkers from './map_with_markers.js';
 import MapControls from './map_controls.js';
+import List from './list.js';
 import About from './about.js';
+import Contacts from './contacts.js';
 import './css/index.css';
 import './css/navbar.css';
 import './css/sidebar.css';
@@ -158,6 +160,27 @@ class App extends React.PureComponent {
             <div className="content-grid">
               <About />
             </div>);
+        case "ListPage":
+          return (
+            <div className="content-grid">
+              <div className="content-filters">
+                <MapControls
+                  onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
+                  onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
+                  onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
+                  onResetFiltersClick={(e) => this.clickResetFilters(e)}
+                />
+              </div>
+              <div className="content-main">
+                <List markers={this.state.markers}/>
+              </div>
+            </div>);
+        case "ContactsPage":
+          return(
+            <div className="content-grid">
+              <Contacts />
+            </div>
+          )
       };
   }
 

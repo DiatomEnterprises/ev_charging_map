@@ -8,13 +8,13 @@ class TopNavbar extends React.Component {
           <img src="logo.png" style={ {height: '100%'} } />
         </li>
         <li className="navbar-cell">
-          <a href="info.html">ABOUT <i className="fas fa-wrench"/></a>
+          <button onClick={(e) => this.props.changeCurrentPage("AboutPage")}>ABOUT</button>
         </li>
         <li className="navbar-cell">
-          <a href="contacts.html">CONTACTS <i className="fas fa-wrench"/></a>
+          <button onClick={(e) => this.props.changeCurrentPage("ContactsPage")}>CONTACTS</button>
         </li>
         <li className="navbar-cell">
-          <a href="login.html">LOGIN <i className="fas fa-wrench"/></a>
+          <button onClick={(e) => this.props.changeCurrentPage("AboutPage")}>LOGIN <i className="fas fa-wrench"/></button>
         </li>
       </div>
     )

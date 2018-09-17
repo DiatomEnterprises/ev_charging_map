@@ -10,7 +10,13 @@ li.navbar-cell {
   height: 100%;
 }
 
-li.navbar-cell a {
+li.navbar-cell button {
+
+  background:none;
+  border:none;
+  font: inherit;
+  cursor: pointer;
+
   display: block;
   color: white;
   text-align: center;
@@ -19,6 +25,6 @@ li.navbar-cell a {
   height: 100%;
 }
 
-li.navbar-cell a:hover {
+li.navbar-cell button:hover {
     background-color: #317c98;
 }
