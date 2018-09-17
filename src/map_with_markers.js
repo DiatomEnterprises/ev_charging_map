@@ -83,6 +83,10 @@ export const MapWithMarkers = compose(
           {(props.isOpen && props.infoIndex === marker.ID) && <InfoWindow onCloseClick={props.onToggleOpen}>
             <div className="marker-info">
               <p> {marker.AddressInfo.Title} </p>
+              <p> {marker.AddressInfo.AddressLine1} </p>
+              <p> {marker.AddressInfo.AddressLine2} </p>
+              <p> {marker.AddressInfo.StateOrProvince} </p>
+              <p> {marker.AddressInfo.Postcode} </p>
               <p> Usage cost: { marker.AddressInfo.UsageCost || "$0.00" } </p>
               <p> <a href={"https://www.google.com/maps/dir/?api=1&destination="+marker.AddressInfo.Latitude+","+marker.AddressInfo.Longitude} target="_blank"> Navigate! </a> </p>
             </div>
