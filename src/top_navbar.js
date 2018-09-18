@@ -5,7 +5,7 @@ class TopNavbar extends React.Component {
     return(
       <div className="navbar navbar-first-row">
         <li className="navbar-cell">
-          <img src="logo.png" style={ {height: '100%'} } />
+          <img src="logo.png" alt="Your way to the closest charger!" style={ {height: '100%'} } />
         </li>
         <li className="navbar-cell">
           <button onClick={(e) => this.props.changeCurrentPage("AboutPage")}>ABOUT</button>

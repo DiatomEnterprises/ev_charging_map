@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## ToDo
-Displaying more information on the map on click.
-Redirect to google maps for navigation
+Displaying more information on the map on click. - Done
+Redirect to google maps for navigation - Done
 Sort data in the List
-Filter by prices 
+Filter by prices

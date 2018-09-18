@@ -1,6 +1,5 @@
 /*global google*/
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Circle } from "react-google-maps";
 
 const { compose, withProps, withHandlers, withStateHandlers } = require("recompose");
@@ -88,7 +87,7 @@ export const MapWithMarkers = compose(
               <p> {marker.AddressInfo.StateOrProvince} </p>
               <p> {marker.AddressInfo.Postcode} </p>
               <p> Usage cost: { marker.AddressInfo.UsageCost || "$0.00" } </p>
-              <p> <a href={"https://www.google.com/maps/dir/?api=1&destination="+marker.AddressInfo.Latitude+","+marker.AddressInfo.Longitude} target="_blank"> Navigate! </a> </p>
+              <p> <a href={"https://www.google.com/maps/dir/?api=1&destination="+marker.AddressInfo.Latitude+","+marker.AddressInfo.Longitude} target="_blank" rel="noopener noreferrer"> Navigate! </a> </p>
             </div>
           </InfoWindow>}
         </Marker>

@@ -132,56 +132,55 @@ class App extends React.PureComponent {
   }
 
   router(){
-
-      switch(this.state.page) {
-        case "IndexPage":
-          return(
-            <div className="content-grid">
-              <div className="content-filters">
-                <MapControls
-                  onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
-                  onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
-                  onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
-                  onResetFiltersClick={(e) => this.clickResetFilters(e)}
-                />
-              </div>
-              <div className="content-main">
-                <MapWithMarkers
-                  markers={this.state.markers}
-                  location={this.state.location}
-                  distance={this.state.distance}
-                  onCurrentMarkerDrag={(e) => this.dragCurrentMarker(e)}
-                />
-              </div>
+    switch(this.state.page) {
+      case "AboutPage":
+        return (
+          <div className="content-grid">
+            <About />
+          </div>);
+      case "ListPage":
+        return (
+          <div className="content-grid">
+            <div className="content-filters">
+              <MapControls
+                onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
+                onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
+                onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
+                onResetFiltersClick={(e) => this.clickResetFilters(e)}
+              />
             </div>
-          );
-        case "AboutPage":
-          return (
-            <div className="content-grid">
-              <About />
-            </div>);
-        case "ListPage":
-          return (
-            <div className="content-grid">
-              <div className="content-filters">
-                <MapControls
-                  onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
-                  onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
-                  onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
-                  onResetFiltersClick={(e) => this.clickResetFilters(e)}
-                />
-              </div>
-              <div className="content-main">
-                <List markers={this.state.markers}/>
-              </div>
-            </div>);
-        case "ContactsPage":
-          return(
-            <div className="content-grid">
-              <Contacts />
+            <div className="content-main">
+              <List markers={this.state.markers}/>
             </div>
-          )
-      };
+          </div>);
+      case "ContactsPage":
+        return(
+          <div className="content-grid">
+            <Contacts />
+          </div>
+        )
+      default:
+        return(
+          <div className="content-grid">
+            <div className="content-filters">
+              <MapControls
+                onConnectionTypeChange={(ids) => this.changeConnectionType(ids)}
+                onChargerTypeChange={(ids) => this.changeChargingLevelId(ids)}
+                onStatusTypeChange={(ids) => this.changeStatusTypeId(ids)}
+                onResetFiltersClick={(e) => this.clickResetFilters(e)}
+              />
+            </div>
+            <div className="content-main">
+              <MapWithMarkers
+                markers={this.state.markers}
+                location={this.state.location}
+                distance={this.state.distance}
+                onCurrentMarkerDrag={(e) => this.dragCurrentMarker(e)}
+              />
+            </div>
+          </div>
+        );
+    };
   }
 
   render() {

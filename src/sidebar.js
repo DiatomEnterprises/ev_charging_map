@@ -5,7 +5,6 @@ import 'rc-slider/assets/index.css';
 
 class Sidebar extends React.Component {
   renderSlider(text, max, default_val, onchange){
-    const createSliderWithTooltip = Slider.createSliderWithTooltip;
     const Handle = Slider.Handle;
 
     const handle = (props) => {
